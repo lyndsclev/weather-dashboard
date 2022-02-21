@@ -9,7 +9,7 @@ Build a weather dashboard that runs in the browser and features dynamically upda
 * JavaScript
 
 ## URLs
-* Repo: 
+* Repo: https://github.com/lyndsclev/weather-dashboard
 * App: 
 
 ## Images/Demo
