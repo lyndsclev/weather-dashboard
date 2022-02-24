@@ -6,6 +6,7 @@ Build a weather dashboard that runs in the browser and features dynamically upda
 ## Technologies
 * HTML 
 * CSS
+* Bulma
 * JavaScript
 
 ## URLs

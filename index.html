@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather Dashboard</title>
-    <link rel="icon" type="image/x-icon" href="/assets/images/donut-favicon.png">
+    <title>IT'S RAINING DONUTS!</title>
+    <link rel="icon" type="image/x-icon" href="./assets/images/donut-favicon.png">
 
     <!-- css links -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
@@ -29,12 +29,20 @@
         <div class="columns">
 
           <!-- search -->
-          <div class="column is-2">
-            <input class="input is-info" type="text" placeholder="SEARCH FOR A CITY">
+          <div class="column is-3">
+           
+            <div class="field is-grouped">
+              <div class="control is-expanded">
+                <input id="cityInput" class="input" type="text" placeholder="ENTER CITY">
+              </div>
+              <button id="searchBtn" class="control button is-info">SEARCH</button>
+            </div>
+
           </div>
 
+
           <!-- results -->
-          <div class="column is-109">
+          <div class="column is-9">
 
             <!-- today's weather section -->
     
@@ -132,3 +140,7 @@
 
 </body>
 </html>
+
+
+
+
