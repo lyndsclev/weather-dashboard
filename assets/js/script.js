@@ -39,7 +39,7 @@ var searchHandler = function(event) {
 // gets city val and uses fetch to get data with coords 
 var getCoords = function(city) {
 
-    var geoApiUrl ="http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=9200cf4dc0ea3a4f49db6371c3632dc6";
+    var geoApiUrl ="https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=9200cf4dc0ea3a4f49db6371c3632dc6";
 
     fetch(geoApiUrl).then(function(response) {
             response.json().then(function(data) {
