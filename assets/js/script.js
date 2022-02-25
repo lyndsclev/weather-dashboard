@@ -10,12 +10,14 @@ var cityInputEl = document.querySelector("#cityInput");
 var searchBtn = document.querySelector("#searchBtn");
 
 // today's weather variables 
+var todayBox = document.querySelector("#today-box");
 var cityName = document.querySelector("#city-name");
 var todayIcon = document.querySelector("#today-icon");
 var todayTemp = document.querySelector("#today-temp");
 var todayWind = document.querySelector("#today-wind");
 var todayHumidity = document.querySelector("#today-humidity");
 var todayUv = document.querySelector("#today-uv");
+var uvi = document.querySelector("#uvi");
 
 // 5-day forecast variables 
 var fiveDayTitle = document.querySelector("#five-day-title");
@@ -79,12 +81,38 @@ var getForecast = function(name, lat, lon) {
             // empty section (?)
 
             // display today's forecast 
+
+            // background color 
+            todayBox.classList.add("has-background-primary-light");
+            todayBox.classList.add("px-4");
+            todayBox.classList.add("pb-4");
+
             cityName.append(name);
-            // todayIcon
+
+            // todayIcon.append
+            var todayIconImg = document.createElement("img");
+            todayIconImg.src = "https://openweathermap.org/img/wn/" + data.current.weather[0].icon + "@2x.png";
+            todayIcon.append(todayIconImg);
+
             todayTemp.append("Temp: " + data.current.temp + " ℉");
             todayWind.append("Wind: " + data.current.wind_speed + " MPH");
             todayHumidity.append("Humidity: " + data.current.humidity + " %");
-            todayUv.append("UV Index: " + data.current.uvi);
+            todayUv.append("UV Index: ");
+            uvi.append(data.current.uvi);
+
+            // change uvi background color based on severity
+            
+            if (data.current.uvi < 2) {
+                uvi.classList.add("has-background-success");
+                uvi.classList.add("has-text-white");    
+            }
+            else if (data.current.uvi > 2 && data.current.uvi <= 7) {
+                uvi.classList.add("has-background-warning");
+            }
+            else if (data.current.uvi > 7) {
+                uvi.classList.add("has-background-danger");
+                uvi.classList.add("has-text-white");
+            };
 
             // pass data to 5-day forecast 
             fiveDay(data);
@@ -134,6 +162,14 @@ var fiveDay = function(data) {
         fiveDayDate.append(moment.unix(data.daily[i].dt).format("MM/DD/YY"));
 
         // icon
+        var fiveDayIconDiv = document.createElement("div");
+        fiveDayIconDiv.classList = "content";
+        fiveDayCardCont.appendChild(fiveDayIconDiv);
+
+        var fiveDayIconImg = document.createElement("img")
+        fiveDayIconImg.src = "https://openweathermap.org/img/wn/" + data.daily[i].weather[0].icon + "@2x.png";
+        
+        fiveDayIconDiv.appendChild(fiveDayIconImg);
 
         // temp
         var fiveDayContTemp = document.createElement("div");

@@ -47,13 +47,15 @@
 
             <!-- today's weather section -->
     
-            <section class="section pt-0">
-              <h1 id="city-name" class="title is-spaced"></h1>
+            <section class="section pt-0 pb-0">
+              <h1 id="city-name" class="title"></h1>
+              <div id="today-box">
               <h2 id="today-icon" class="subtitle"></h2>
               <h2 id="today-temp" class="subtitle"></h2>
               <h2 id="today-wind" class="subtitle"></h2>
               <h2 id="today-humidity" class="subtitle"></h2>
-              <h2 id="today-uv" class="subtitle"></h2>
+              <h2 class="subtitle"><span id="today-uv"></span><span id="uvi" class="px-2 py-1"></span></h2>
+              </div>
             </section>
 
             <!-- 5-day forecast -->
@@ -62,14 +64,7 @@
               <h1 id="five-day-title" class="title"></h1>
               <div id="five-day-columns" class="columns">
 
-                <!-- <div class="column">
-                  <div class="card has-background-primary-light">
-                    <div class="card-content">
-                      <div class="content">
-                      </div>
-                    </div>
-                  </div>
-                </div> -->
+                <!-- where cards will populate -->
               
               </div>
             </section>
@@ -85,10 +80,6 @@
       <footer class="footer content has-text-centered has-background-info-light mb-0">
           <h4>BUILT WITH 🍩 BY LYNDSEY </h4>
       </footer>
-
-
-
-
     
     <!-- moment link-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
