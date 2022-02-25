@@ -23,6 +23,10 @@ var uvi = document.querySelector("#uvi");
 var fiveDayTitle = document.querySelector("#five-day-title");
 var fiveDayColumns = document.querySelector("#five-day-columns");
 
+// saved search variables 
+var savedCities = document.querySelector("#saved-cities");
+var savedCitiesArr;
+
 // handle search input 
 var searchHandler = function(event) {
     event.preventDefault();
@@ -46,9 +50,6 @@ var getCoords = function(city) {
     fetch(geoApiUrl).then(function(response) {
             response.json().then(function(data) {
 
-                // verify it worked 
-                console.log(data);
-
                 // verify if city is valid 
                 if (data.length === 0) {
                     
@@ -63,13 +64,15 @@ var getCoords = function(city) {
                 
                 // pass name, lat & lon vals to getForecast 
                 getForecast(data[0].name, data[0].lat, data[0].lon);
+
+                // pass name, lat & lon vals to saveSearch
+                saveSearch(data[0].name, data[0].lat, data[0].lon);
             });
     });
 };
 
 // get weather forecast via one call api 
 var getForecast = function(name, lat, lon) {
-    console.log(name, lat, lon);
 
     var oneApiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=9200cf4dc0ea3a4f49db6371c3632dc6";
 
@@ -193,12 +196,26 @@ var fiveDay = function(data) {
         var fiveDayContHumidity = document.createElement("p"); 
         fiveDayContHumidity.classList = "content";
         fiveDayCardCont.appendChild(fiveDayContHumidity);
-        fiveDayContHumidity.append("Humidity " + data.daily[i].humidity + " %");
+        fiveDayContHumidity.append("Humidity: " + data.daily[i].humidity + " %");
     };
+};
+
+// save search to localStorage 
+var saveSearch = function(name, lat, lon) {
+    
+    // define key and value 
+    var cityKey = lat + lon; 
+    var cityValue = name; 
+
+    console.log(cityKey, cityValue);
+
+    // create object with key and value to push to array  
+
 };
 
 // event listeners
 searchBtn.addEventListener("click", searchHandler);
+
 
 
 

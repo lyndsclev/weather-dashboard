@@ -8,6 +8,11 @@ Build a weather dashboard that runs in the browser and features dynamically upda
 * CSS
 * Bulma
 * JavaScript
+* Moment.js
+
+## APIs
+* OpenWeather Geocoding API
+* OpenWeather One Call API
 
 ## URLs
 * Repo: https://github.com/lyndsclev/weather-dashboard
