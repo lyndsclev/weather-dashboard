@@ -17,6 +17,10 @@ var todayWind = document.querySelector("#today-wind");
 var todayHumidity = document.querySelector("#today-humidity");
 var todayUv = document.querySelector("#today-uv");
 
+// 5-day forecast variables 
+var fiveDayTitle = document.querySelector("#five-day-title");
+var fiveDayColumns = document.querySelector("#five-day-columns");
+
 // handle search input 
 var searchHandler = function(event) {
     event.preventDefault();
@@ -75,7 +79,6 @@ var getForecast = function(name, lat, lon) {
             // empty section (?)
 
             // display today's forecast 
-
             cityName.append(name);
             // todayIcon
             todayTemp.append("Temp: " + data.current.temp + " ℉");
@@ -84,7 +87,6 @@ var getForecast = function(name, lat, lon) {
             todayUv.append("UV Index: " + data.current.uvi);
 
             // pass data to 5-day forecast 
-
             fiveDay(data);
 
         });
@@ -93,20 +95,70 @@ var getForecast = function(name, lat, lon) {
 
 
 // display 5-day forecast 
-
 var fiveDay = function(data) {
     console.log(data);
 
     // empty section (?)
-}
+
+    // display title
+    fiveDayTitle.append("5-Day Forecast");
+
+
+    // create cards with for loop
+    for (var i = 1; i < 6; i++) {
+
+        // column div
+        var fiveDayCol = document.createElement("div");
+        fiveDayCol.classList = "column";
+        fiveDayColumns.appendChild(fiveDayCol);
+
+        // card div
+        var fiveDayCard = document.createElement("div");
+        fiveDayCard.classList = "card has-background-primary-light";
+        fiveDayCol.appendChild(fiveDayCard);
+
+        // card content div
+        var fiveDayCardCont = document.createElement("div");
+        fiveDayCardCont.classList = "card-content";
+        fiveDayCard.appendChild(fiveDayCardCont);
+
+        // content div 
+        var fiveDayCont = document.createElement("div");
+        fiveDayCont.classList = "content";
+        fiveDayCard.appendChild(fiveDayCont);
+
+        // date
+
+        // icon
+
+        // temp
+        var fiveDayContTemp = document.createElement("div");
+        fiveDayContTemp.classList = "content";
+        fiveDayCardCont.appendChild(fiveDayContTemp);
+        fiveDayContTemp.append("Temp: " + data.daily[i].temp.day + " ℉");
+
+        // wind
+        var fiveDayContWind = document.createElement("div"); 
+        fiveDayContWind.classList = "content";
+        fiveDayCardCont.appendChild(fiveDayContWind);
+        fiveDayContWind.append("Wind: " + data.daily[i].wind_speed + " MPH");
+
+
+        // humidity 
+        var fiveDayContHumidity = document.createElement("p"); 
+        fiveDayContHumidity.classList = "content";
+        fiveDayCardCont.appendChild(fiveDayContHumidity);
+        fiveDayContHumidity.append("Humidity " + data.daily[i].humidity + " %");
+
+
+
+
+
+    };
+};
 
 // event listeners
 searchBtn.addEventListener("click", searchHandler);
-
-
-
-
-
 
 
 
