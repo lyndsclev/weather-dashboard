@@ -128,6 +128,10 @@ var fiveDay = function(data) {
         fiveDayCard.appendChild(fiveDayCont);
 
         // date
+        var fiveDayDate = document.createElement("div");
+        fiveDayDate.classList = "content";
+        fiveDayCardCont.appendChild(fiveDayDate);
+        fiveDayDate.append(moment.unix(data.daily[i].dt).format("MM/DD/YY"));
 
         // icon
 
@@ -149,10 +153,6 @@ var fiveDay = function(data) {
         fiveDayContHumidity.classList = "content";
         fiveDayCardCont.appendChild(fiveDayContHumidity);
         fiveDayContHumidity.append("Humidity " + data.daily[i].humidity + " %");
-
-
-
-
 
     };
 };
