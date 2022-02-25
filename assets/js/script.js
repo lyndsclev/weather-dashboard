@@ -78,7 +78,16 @@ var getForecast = function(name, lat, lon) {
         response.json().then(function(data) {
             console.log(data);
 
-            // empty section (?)
+            // clear background class & empty elements
+            todayBox.classList.remove("has-background-primary-light");
+            
+            cityName.innerHTML= "";
+            todayIcon.innerHTML = "";
+            todayTemp.innerHTML = "";
+            todayWind.innerHTML = "";
+            todayHumidity.innerHTML = "";
+            todayUv.innerHTML = "";
+            uvi.innerHTML = "";
 
             // display today's forecast 
 
@@ -126,7 +135,10 @@ var getForecast = function(name, lat, lon) {
 var fiveDay = function(data) {
     console.log(data);
 
-    // empty section (?)
+    // empty section
+    fiveDayTitle.innerHTML = "";
+    fiveDayColumns.innerHTML = "";
+
 
     // display title
     fiveDayTitle.append("5-Day Forecast");
