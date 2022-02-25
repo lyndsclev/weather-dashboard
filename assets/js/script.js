@@ -63,7 +63,6 @@ var getCoords = function(city) {
                 
                 // pass name, lat & lon vals to getForecast 
                 getForecast(data[0].name, data[0].lat, data[0].lon);
-
             });
     });
 };
@@ -110,7 +109,6 @@ var getForecast = function(name, lat, lon) {
             uvi.append(data.current.uvi);
 
             // change uvi background color based on severity
-            
             if (data.current.uvi < 2) {
                 uvi.classList.add("has-background-success");
                 uvi.classList.add("has-text-white");    
@@ -125,11 +123,9 @@ var getForecast = function(name, lat, lon) {
 
             // pass data to 5-day forecast 
             fiveDay(data);
-
         });
     });
 };
-
 
 // display 5-day forecast 
 var fiveDay = function(data) {
@@ -139,10 +135,8 @@ var fiveDay = function(data) {
     fiveDayTitle.innerHTML = "";
     fiveDayColumns.innerHTML = "";
 
-
     // display title
     fiveDayTitle.append("5-Day Forecast");
-
 
     // create cards with for loop
     for (var i = 1; i < 6; i++) {
@@ -195,13 +189,11 @@ var fiveDay = function(data) {
         fiveDayCardCont.appendChild(fiveDayContWind);
         fiveDayContWind.append("Wind: " + data.daily[i].wind_speed + " MPH");
 
-
         // humidity 
         var fiveDayContHumidity = document.createElement("p"); 
         fiveDayContHumidity.classList = "content";
         fiveDayCardCont.appendChild(fiveDayContHumidity);
         fiveDayContHumidity.append("Humidity " + data.daily[i].humidity + " %");
-
     };
 };
 
