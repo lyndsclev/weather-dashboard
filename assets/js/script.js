@@ -202,7 +202,10 @@ var fiveDay = function(data) {
 
 // save search to localStorage 
 var saveSearch = function(name, lat, lon) {
-    
+
+    // get existing saved cities or set array to empty 
+    savedCitiesArr = JSON.parse(window.localStorage.getItem("savedCitiesArr")) || [];
+
     // define key and value 
     var cityKey = lat + lon; 
     var cityValue = name; 
@@ -210,7 +213,16 @@ var saveSearch = function(name, lat, lon) {
     console.log(cityKey, cityValue);
 
     // create object with key and value to push to array  
+    var newSavedCity = {
+        savedCityId: cityKey,
+        savedCityName: cityValue
+    };
 
+    savedCitiesArr.push(newSavedCity);
+
+    // save to localStorage
+    window.localStorage.setItem("savedCitiesArr", JSON.stringify(savedCitiesArr));
+    console.log(savedCitiesArr);
 };
 
 // event listeners
