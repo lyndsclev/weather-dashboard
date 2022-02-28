@@ -25,7 +25,7 @@ var fiveDayColumns = document.querySelector("#five-day-columns");
 
 // saved search variables 
 var savedCities = document.querySelector("#saved-cities");
-var savedCitiesArr;
+var savedCitiesArr = [];
 
 // handle search input 
 var searchHandler = function(event) {
@@ -34,8 +34,9 @@ var searchHandler = function(event) {
 
     if(city) {
       
-        // pass argument to getCoords 
+        // pass argument to getCoords & save search 
         getCoords(city);
+        saveSearch(city);
 
     } else {
         alert("Please enter a city name.");
@@ -65,8 +66,8 @@ var getCoords = function(city) {
                 // pass name, lat & lon vals to getForecast 
                 getForecast(data[0].name, data[0].lat, data[0].lon);
 
-                // pass name, lat & lon vals to saveSearch
-                saveSearch(data[0].name, data[0].lat, data[0].lon);
+                // // pass name to saveSearch
+                // saveSearch(data[0].name);
             });
     });
 };
@@ -78,7 +79,6 @@ var getForecast = function(name, lat, lon) {
 
     fetch(oneApiUrl).then(function(response) {
         response.json().then(function(data) {
-            console.log(data);
 
             // clear background class & empty elements
             todayBox.classList.remove("has-background-primary-light");
@@ -132,7 +132,6 @@ var getForecast = function(name, lat, lon) {
 
 // display 5-day forecast 
 var fiveDay = function(data) {
-    console.log(data);
 
     // empty section
     fiveDayTitle.innerHTML = "";
@@ -200,33 +199,63 @@ var fiveDay = function(data) {
     };
 };
 
-// save search to localStorage 
-var saveSearch = function(name, lat, lon) {
-
-    // get existing saved cities or set array to empty 
-    savedCitiesArr = JSON.parse(window.localStorage.getItem("savedCitiesArr")) || [];
+// save to localStorage  
+var saveSearch = function(city) {
 
     // define key and value 
-    var cityKey = lat + lon; 
-    var cityValue = name; 
+    var cityValue = city; 
 
-    console.log(cityKey, cityValue);
+    // push to array 
+    savedCitiesArr.push(cityValue);
 
-    // create object with key and value to push to array  
-    var newSavedCity = {
-        savedCityId: cityKey,
-        savedCityName: cityValue
-    };
+    localStorage.setItem("savedCitiesArr", savedCitiesArr);
 
-    savedCitiesArr.push(newSavedCity);
+    loadSearch();
+};
 
-    // save to localStorage
-    window.localStorage.setItem("savedCitiesArr", JSON.stringify(savedCitiesArr));
-    console.log(savedCitiesArr);
+// load localStorage as buttons 
+var loadSearch = function() {
+
+    var storedCities = localStorage.getItem("savedCitiesArr");
+    var storedCitiesArr = storedCities.split(',');
+
+    if (storedCities) {
+
+       savedCities.innerHTML = '';
+       
+       for (var i = 0; i < storedCitiesArr.length; i++) {
+
+           var savedCityLi = document.createElement("li"); 
+           savedCities.appendChild(savedCityLi);
+           
+           var savedCityBtn = document.createElement("button");
+           savedCityBtn.classList.add("button");
+           savedCityBtn.classList.add("is-fullwidth");
+           savedCityBtn.classList.add("is-info");
+           savedCityBtn.classList.add("is-outlined");
+           savedCityBtn.classList.add("mb-2");
+          
+           savedCityBtn.innerHTML = storedCitiesArr[i];
+           
+           savedCityBtn.setAttribute("value", storedCitiesArr[i]);
+
+           // event listener, run getCoords 
+           savedCityBtn.addEventListener("click", function() {
+               getCoords(this.innerHTML);
+           });
+           
+           savedCityLi.appendChild(savedCityBtn);
+        };
+   };
 };
 
 // event listeners
 searchBtn.addEventListener("click", searchHandler);
+
+// callback functions
+loadSearch();
+
+
 
 
 
