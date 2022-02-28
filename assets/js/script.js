@@ -65,9 +65,6 @@ var getCoords = function(city) {
                 
                 // pass name, lat & lon vals to getForecast 
                 getForecast(data[0].name, data[0].lat, data[0].lon);
-
-                // // pass name to saveSearch
-                // saveSearch(data[0].name);
             });
     });
 };
